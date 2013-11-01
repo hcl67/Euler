@@ -32,17 +32,6 @@ def genPrime(): ##gen prime
             prime.append(x)
             yield x
 
-def isTriangle(n): ##check if n is triangle number (=n(n+1)/2)
-    k=int(sqrt(n*2))
-    return k*(k+1)==n*2
-
-def isPentagonal(n): ##check if n is pentagonal number (=n(3n-1)/2)
-    k=ceil(sqrt(n*2/3))
-    return k*(3*k-1)==n*2
-
-def isHexagonal(n):  ##check if n is hexagonal number (=n(2n-1))
-    k=ceil(sqrt(n/2))
-    return k*(2*k-1)==n
 
 def HCF(a,b):  ##find the highest common factor of a,b
     x=max(a,b)
@@ -58,7 +47,7 @@ def fctr(n): ##find all factors of n
     s=[]
     for i in range(1,k):
         if n%i==0:
-            s.append(n)
+            s.append(i)
     return s
 
 def Pfctr(n):  ##find all prime factors of n
@@ -73,14 +62,6 @@ def Pfctr(n):  ##find all prime factors of n
     s.append(k)
     return s
 
-def permu(a,b): ##find all permutation of p using permu('',p)
-    if len(b)==0:
-        print(a)
-    else:
-        for i in b:
-            c=b[:b.index(i)]+b[b.index(i)+1:]
-            permu(a+i,c)
-
 def lettlecomp(a,b): ##compare the difference of letters from 2 strings
     return ''.join(sorted(list(str(a)))) == ''.join(sorted(list(str(b))))
 
@@ -93,3 +74,86 @@ def fmtz(i,n):  ##add '0' before integer i till length of n
         while len(k)<n:
             k='0'+k
         return k
+
+
+
+
+def Triangle(n):
+    return n*(n+1)/2
+
+def calTriangle(x):
+    return (math.sqrt(1+8*x)-1)/2
+
+def isTriangle(x):
+    n = calTriangle(x)
+    return n==int(n)
+
+def Square(n):
+    return n*n
+
+def calSquare(x):
+    return math.sqrt(x)
+
+def isSquare(x):
+    n = calSquare(x)
+    return n==int(n)
+
+def Pentagonal(n):
+    return n*(3*n-1)/2
+
+def calPentagonal(x):
+    return (math.sqrt(1+24*x)+1)/6
+
+def isPentagonal(x):
+    n = calPentagonal(x)
+    return n==int(n)
+
+def Hexagonal(n):
+    return n*(2*n-1)
+
+def calHexagonal(x):
+    return (math.sqrt(1+8*x)+1)/4
+
+def isHexagonal(x):
+    n = calHexagonal(x)
+    return n==int(n)
+
+def Heptagonal(n):
+    return n*(5*n-3)/2
+
+def calHeptagonal(x):
+    return (math.sqrt(9+40*x)+3)/10
+
+def isHeptagonal(x):
+    n = calHeptagonal(x)
+    return n==int(n)
+
+def Octagonal(n):
+    return n*(3*n-2)
+
+def calOctagonal(x):
+    return (math.sqrt(4+12*x)+2)/6
+
+def isOctagonal(x):
+    n = calOctagonal(x)
+    return n==int(n)
+
+def Permutate(l):   ##generate all permutation of list l
+    if len(l)==1:
+        return [l]
+    else:
+        returnlist=[]
+        for i in range(len(l)):
+            t=[x for x in l]
+            t.pop(i)
+            p=Permutate(t)
+            for j in p:
+                returnlist+=[[l[i]]+j]
+        return returnlist
+
+def calDigt(s):
+    n=0
+    for i in s:
+        n+=int(i)
+
+    return n
