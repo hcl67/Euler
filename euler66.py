@@ -1,72 +1,123 @@
+# -*- coding: cp936 -*-
 '''
 Consider quadratic Diophantine equations of the form:
 
-x2 â€“ Dy2 = 1
+x2 ¨C Dy2 = 1
 
-For example, when D=13, the minimal solution in x is 6492 â€“ 13Ã—1802 = 1.
+For example, when D=13, the minimal solution in x is 6492 ¨C 13¡Á1802 = 1.
 
 It can be assumed that there are no solutions in positive integers when D is square.
 
 By finding minimal solutions in x for D = {2, 3, 5, 6, 7}, we obtain the following:
 
-32 â€“ 2Ã—22 = 1
-22 â€“ 3Ã—12 = 1
-92 â€“ 5Ã—42 = 1
-52 â€“ 6Ã—22 = 1
-82 â€“ 7Ã—32 = 1
+32 ¨C 2¡Á22 = 1
+22 ¨C 3¡Á12 = 1
+92 ¨C 5¡Á42 = 1
+52 ¨C 6¡Á22 = 1
+82 ¨C 7¡Á32 = 1
 
-Hence, by considering minimal solutions in x for D â‰¤ 7, the largest x is obtained when D=5.
+Hence, by considering minimal solutions in x for D ¡Ü 7, the largest x is obtained when D=5.
 
-Find the value of D â‰¤ 1000 in minimal solutions of x for which the largest value of x is obtained.
+Find the value of D ¡Ü 1000 in minimal solutions of x for which the largest value of x is obtained.
+
+Hint
+
+Pell equation, wikipedia
 '''
 
 from math import sqrt
 from math import ceil
-def isPrime(x): ##check if x is prime
-    if x<1:
-        return False
-    if x%2==0 and x!=2:
-        return False
-    else:
-        for i in range(3,int(sqrt(x))+1,2):
-            if x%i==0 and x!=i:
-                return False
-        return True
+import math
 
-def genPrime(nmax): ##gen prime
-    prime=[2]
-    x=1
-    while x<nmax:
-        x+=2
-        flg=0
-        sqx=int(sqrt(x))
-        for d in prime:
-            if x%d==0:
-                flg=1
-                break
-            if d>sqx:
-                break
-        if flg==0:
-            prime.append(x)
-            yield x
+def isqrt(n):
+    x=float(n)
+    while 1:
+        y=x
+        x=(y+n/y)/2
+        if y-x<1:
+            break
+    return int(x)
+
 
 def isSquare(x):
     return sqrt(x)==int(sqrt(x))
 
-l_d=[]
-for d in genPrime(1000):
-    l_d.append(d)
-s=1
+
+
+'''
+
+l_d=[x for x in range(1,1001) if not isSquare(x)]
+
+y=1
 while len(l_d)>1:
     lenl_d=len(l_d)
-    s2=s*s
     for d in l_d:
-        s2d=s2*d
-        if isSquare(s2d+2) or isSquare(s2d-2) or isSquare(s2d-1) or isSquare(s2d+1):
-            #print(d)
+        if d%10 in [1,2,6,7] and y%10 in [1,9,4,6]:
+            continue
+        elif d%10 in [3,4,8,9] and y%10 in [2,8,3,7]:
+            continue
+        x2=y*y*d+1
+        if (isqrt(x2)**2-y*y*d==1):
+            print(d,isqrt(x2),y)
             l_d.pop(l_d.index(d))
-    if lenl_d!=len(l_d) and len(l_d)%10==0:
-        print(len(l_d))
-    s+=1
-print(l_d)
+#            print(d,(l_d))
 
+    if lenl_d!=len(l_d):
+        print("len(l_d)=",len(l_d))
+    y+=1
+print(l_d)
+'''
+nmax=1000000
+def conFrac1(n,nmax):
+    a1=int(sqrt(n))
+    a2=a1
+    a3=1
+    res=[a1]
+    i=1
+    while i<=nmax:
+        r=[t for t in res]
+        yield r   ##yield would release the content of yielded var.
+        #print(seq)
+        b1=a1
+        b2=a2
+        b3=a3
+        a1=int(b3/(sqrt(n)-b2))
+        a3=(n-b2*b2)/b3
+        a2=a1*a3-b2
+        res.append(a1)
+        i+=1
+
+def calFrac1(x):
+    a=1
+    b=x.pop(-1)
+    while(len(x)>0):
+        c=x.pop(-1)
+        a+=b*c
+        t=b
+        b=a
+        a=t
+    return [b,a]
+
+l_d=[x for x in range(1,1001) if not isSquare(x)]
+
+maxx=0
+maxd=0
+
+for d in l_d:
+    for l in conFrac1(d,nmax):
+        #print("l =",l)
+        frac=calFrac1(l)
+        #print("frac =",frac)
+        x=frac[0]
+        y=frac[1]
+        if x*x-d*y*y==1:
+            #print("d =",d,"x =",x,"y =",y)
+            #print("x*x =",x*x)
+            #print("d*y*y =",d*y*y)
+            if x>maxx:
+                maxx=x
+                maxd=d
+            break
+
+print("max x =",maxx)
+print("d =",maxd)

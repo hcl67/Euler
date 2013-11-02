@@ -15,10 +15,22 @@ def isPrime(x): ##check if x is prime
                 return False
         return True
 
-def genPrime(): ##gen prime
+def isPrimeMAX(x): ##check if x is prime
+    if x<1:
+        return False
+    if x%2==0 and x!=2:
+        return False
+    else:
+        for i in range(3,int(sqrt(x))+1,2):
+            if x%i==0 and x!=i:
+                return False
+        return True
+
+
+def genPrime(nmax): ##gen prime
     prime=[2]
     x=1
-    while 1:
+    while x<nmax:
         x+=2
         flg=0
         sqx=int(sqrt(x))
@@ -31,7 +43,14 @@ def genPrime(): ##gen prime
         if flg==0:
             prime.append(x)
             yield x
-
+            
+def genPrimeFile(nmax):
+    filename="Prime"+str(nmax)+".txt"
+    f=open(filename,'w')
+    p=['2']
+    for x in genPrime(nmax):
+        p.append(str(x))
+    f.write(' '.join(p))
 
 def HCF(a,b):  ##find the highest common factor of a,b
     x=max(a,b)
@@ -150,6 +169,24 @@ def Permutate(l):   ##generate all permutation of list l
             for j in p:
                 returnlist+=[[l[i]]+j]
         return returnlist
+
+def Combination(l,n):  ##genenrate all combination of list l with length n
+    if n>len(l) or n<0:
+        #print("ERROR n")
+        return []
+    elif n==1:
+        return [[x] for x in l]
+    elif n==len(l):
+        return [l]
+    else:
+        rl=[]
+        for x in l: 
+            xl=Combination(l[l.index(x)+1:],n-1)
+            xln=[]
+            for y in xl:
+                if len(xl)>0:
+                    rl.append([x]+y)
+        return rl     
 
 def calDigt(s):
     n=0
