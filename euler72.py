@@ -53,16 +53,16 @@ def CalPhi2(x):
 #print(CalPhi2(1000000))
 
 
-if __name__ == '__main__':
-    import timeit
-    print(timeit.timeit("CalPhi2(1000000)", setup="from __main__ import CalPhi2",number=100))
-    print(timeit.timeit("CalPhi(1000000)", setup="from __main__ import CalPhi",number=100))
-    
+##if __name__ == '__main__':
+##    import timeit
+##    print(timeit.timeit("CalPhi2(1000000)", setup="from __main__ import CalPhi2",number=100))
+##    print(timeit.timeit("CalPhi(1000000)", setup="from __main__ import CalPhi",number=100))
+##    
 
-'''
+
 c=0
 for d in range(2,MAXD+1):
     c+=CalPhi(d)
     if d%10000==0:print(d)
 print(c)
-'''
+
