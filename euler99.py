@@ -1,4 +1,4 @@
-f = open("D:\p099_base_exp.txt", "r")
+f = open("p099_base_exp.txt", "r")
 numlist = []
 for line in f:
     numlist += [tuple(map(int,line.rstrip("\n").split(",")))]
