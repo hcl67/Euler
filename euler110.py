@@ -58,8 +58,30 @@ while(cal110(kl)<thrd):
 #        print(kl)
 # 结果再适当缩小，人肉尝试
 print(kl,gen110(kl),cal110(kl))    
-'''    
+'''  
+#暴力搜索结果
+ans = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0] 
+bstnum = gen110([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1])
     
+def find110(kl):
+    global ans,bstnum
+    if gen110(kl) > bstnum:
+        print("failed kl:",kl)
+        return
+    elif cal110(kl) > thrd:
+        ans = kl
+        bstnum = gen110(kl)
+        print(ans,gen110(ans),cal110(ans))
+        return
+    else:
+        find110([kl[j] + 1 if j == 0 else kl[j] for j in range(len(kl))])
+        for i in range(1,len(kl)):
+            if kl[i] < kl[i-1]:
+                find110([kl[j] + 1 if j == i else kl[j] for j in range(len(kl))])             
+                    
+find110(ans)    
+print()
+print(ans,gen110(ans),cal110(ans))    
   
 print(datetime.datetime.now() - btime)    
 kl = [4, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
