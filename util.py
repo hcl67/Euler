@@ -14,8 +14,7 @@ def isprime(n):
             return False
     return True
   
-  
-  def pfdeco(n):
+def pfdeco(n):
     pf = []
     pn = 0
     p = plist[pn]
@@ -28,3 +27,12 @@ def isprime(n):
             p = plist[pn]
     return pf
     
+    
+def gcd(a,b):
+    if a>b:
+        a,b = b,a
+    c = b%a
+    if c == 0:
+        return a
+    else:
+        return gcd(c,a)    
