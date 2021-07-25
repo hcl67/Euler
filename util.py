@@ -29,12 +29,11 @@ def pfdeco(n):
     
 def gcdplus(a,b):
     if a > b:
-        r, nr = a,b
+        r, nr = a, b
     else:
-        r, nr = b,a
-        
-    s, ns = 1,0
-    t, nt = 0,1
+        r, nr = b, a        
+    s, ns = 1, 0
+    t, nt = 0, 1
     while 1:
         q = r // nr
         r, nr = nr, r%nr
