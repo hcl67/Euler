@@ -41,7 +41,7 @@ def gcdplus(a,b):
         t, nt = nt, t-q*nt
         if nr == 0:
             if a > b:
-                return nr, s, t
+                return r, s, t
             else:
-                return nr, t, s
+                return r, t, s
         
