@@ -1,8 +1,8 @@
 __f = open("prime100000.txt", "r")
 __plist = []
-for line in f:
+for line in __f:
     __plist += list(map(int,line.rstrip("\n").split(" ")))
-f.close()
+__f.close()
 
 def isprime(n):
     if n == 1:
