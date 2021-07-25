@@ -27,3 +27,22 @@ def pfdeco(n):
             p = __plist[pn]
     return pf
     
+def gcdplus(a,b):
+    if a > b:
+        r, nr = a,b
+    else:
+        r, nr = b,a
+        
+    s, ns = 1,0
+    t, nt = 0,1
+    while 1:
+        q = r // nr
+        r, nr = nr, r%nr
+        s, ns = ns, s-q*ns
+        t, nt = nt, t-q*nt
+        if nr == 0:
+            if a > b:
+                return nr,s,t
+            else:
+                return nr,t,s
+        
