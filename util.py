@@ -1,7 +1,7 @@
 __f = open("prime1000000.txt", "r")
 __plist = []
 for line in __f:
-    __plist += list(map(int,line.rstrip("\n").split(" ")))
+    __plist += list(map(int,line.rstrip("\n").split()))
 __f.close()
 __pset = set(__plist)
 
