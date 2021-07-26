@@ -1,12 +1,18 @@
-__f = open("prime100000.txt", "r")
+__f = open("prime1000000.txt", "r")
 __plist = []
 for line in __f:
     __plist += list(map(int,line.rstrip("\n").split(" ")))
 __f.close()
+__pset = set(__plist)
 
 def isprime(n):
     if n == 1:
         return False
+    if n < 1000000:
+        if n in __pset:
+            return True
+        else:
+            return False
     for p in __plist:
         if p*p>n:
             break
