@@ -41,18 +41,40 @@ thrd = 1000000
 ans = []
 tgt = 10
 
-for n in range(1000,thrd):
+
+# 调整一下，只需遍历一半就行了
+
+for n in range(1,thrd):
     fctlist = fct(n)  
-    if len(fctlist) < tgt:
-        continue
     k = 0
-    for y in fctlist:
-        if (n//y + y) % 4 == 0 and (n//y + y) // 4 < y:
-            k += 1
-#    print(n,fctlist,k)
-    if k == tgt:
+    lenfct = len(fctlist) 
+    for i in range(lenfct-1,lenfct//2-1,-1):
+        y = fctlist[i]
+        x = fctlist[lenfct-1-i]
+        ss = sqrt(n/3)
+        if (x + y) % 4 == 0:
+            if x <= ss or x==y:
+                k+=1
+            else:
+                k+=2
+    if k == 1:
         ans += [n]
 
+
+
+
+# for n in range(1000,thrd):
+#     fctlist = fct(n)  
+#     if len(fctlist) < tgt:
+#         continue
+#     k = 0
+#     for y in fctlist:
+#         if (n//y + y) % 4 == 0 and (n//y + y) // 4 < y:
+#             k += 1
+#     print(n,fctlist,k)
+#     if k == tgt:
+#         ans += [n]        
+        
 print(len(ans))
 
 print(datetime.now()-btime)
