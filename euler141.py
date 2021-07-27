@@ -47,14 +47,47 @@ r<d:
 r * t^2 = (r*p)^3 + r^2
 令 r*p = d
 则 r | d^2 (q是整数)
+    
 
-22min...
+
+使用 ke9tv 的思路，设p = a/b  a>b gcd(a,b) = 1
+
+则 d = a*r/b; q = a^2*r/b^2
+
+b^2 | q => r = c*b^2, q = a*c*b, d = a^2*c
+
+n = dq+r = a^3*b*c^2 + c*b^2.
+
+
 
 '''
 from datetime import datetime
-from math import isqrt
+from math import isqrt,gcd
 
 btime = datetime.now()
+
+ans = set()
+
+for a in range(1,10000+1):
+    for b in range(1,a):
+        if gcd(a,b)>1:
+            continue
+        if (a**3)*b+(b**2)>=1e12:
+            break
+        c = 0
+        while 1:
+            c += 1
+            n = a**3*b*c**2 + c*b**2
+            if n > 1e12:
+                break
+            if isqrt(n)**2 == n:
+                print(n)
+                ans.add(n)
+print(ans)
+print(sum(ans))
+
+
+'''
 thrd = 1000000
 thrd2 = thrd**2
 
@@ -72,8 +105,9 @@ for d in range(1,thrd+1):
         if t*t == t2:
             print(t*t,rlist[i],d)
             ans += [(t*t,rlist[i],d)]
-            
+          
 ans.sort()            
 print(ans)
 print(sum(map(lambda x:x[0],ans)))
+'''  
 print(datetime.now()-btime)
