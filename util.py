@@ -63,4 +63,15 @@ def gcdplus(a,b):
                 return r, s, t
             else:
                 return r, t, s
+            
+
+def genpgg(thrd):
+    from math import gcd
+    pgg = []
+    for m in range(2,thrd+1):
+        for n in range(1,m):
+            if gcd(m,n) > 1 or (m+n)%2 == 0:
+                continue
+            pgg += [(m**2-n**2,2*m*n,m**2+n**2)]
+    return pgg            
         
