@@ -1,4 +1,4 @@
-#猜出来的
+#暴力+猜
 
 from math import isqrt,gcd
 from datetime import datetime
