@@ -75,3 +75,33 @@ def genpgg(thrd):
             pgg += [(m**2-n**2,2*m*n,m**2+n**2)]
     return pgg            
         
+def isprime_mr(n):
+    
+    if n > 2**64:
+        print("warrning, n>2^64, the miller-rabin test may fail")
+
+    alist = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37]
+
+    # miller_rabin
+
+    if n == 2:
+        return True
+
+    if n % 2 == 0:
+        return False
+
+    r, s = 0, n - 1
+    while s % 2 == 0:
+        r += 1
+        s //= 2
+    for a in alist:
+        x = pow(a, s, n)
+        if x == 1 or x == n - 1:
+            continue
+        for _ in range(r - 1):
+            x = pow(x, 2, n)
+            if x == n - 1:
+                break
+        else:
+            return False
+    return True    
