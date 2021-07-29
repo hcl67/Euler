@@ -88,12 +88,14 @@ def check146(n, printflag = True):
                 print(n,"** 2 +",j,'非质数:')
                 #print(n**2+j,"分解：",dict(pfdeco(n**2+j)))
             return False
-    for j in [11,17,19,21,23]:
+    for j in [21]: 
+        # n^2 % 3 =1 => n^2 + 11/17/23 %3 = 0 => n^3 % 7 = 2 => n^2+19 %7 = 0 只需check 21 
         if isprime_mr(n**2+j):
             if printflag:
                 print(n,"** 2 +",j,'质数:')
             return False
     return True
+
 
 btime = datetime.now()
 
