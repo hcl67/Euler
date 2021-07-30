@@ -76,7 +76,7 @@ def genpgg(thrd):
     return pgg            
         
 def isprime_mr(n):
-    
+    """miller-rabin's prime test"""
     if n > 2**64:
         print("warrning, n>2^64, the miller-rabin test may fail")
 
