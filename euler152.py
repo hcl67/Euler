@@ -105,17 +105,7 @@ def cal152(rn = 0,rd = 1, nums = [], pl = [], N = N):
                 ans += [(tssn,tssd,sorted(nums+newnums),[x for x in pl if x != p])]
     return ans           
          
-            
-'''
-所有超过2的p的分母需要消掉，打出余数k = 1~9的  1/(kn)^2 通分后，分子是完全平方数的情况，筛除 kn < 80 与  k < n 后有：
 
-2 (3, 4) 25 5 {5: 1}
-3 (1, 2, 3) 49 7 {7: 1}
-3 (1, 3, 4) 169 13 {13: 1}
-3 (1, 4, 5) 441 21 {3: 1, 7: 1}
-3 (2, 4, 6) 784 28 {2: 2, 7: 1}
-
-'''
 
 
 def warp152(rn,rd,nums):
@@ -135,7 +125,7 @@ for n in range(3,N+1):
     if n in {4,8,16,32,64}:
         continue
     print(n)
-    paral = [(1,n**2,[n],[2,3,5,7,13])]
+    paral = [(1,n**2,[n],[2,3,5,7,11,13])]
 
     while len(paral) > 0:
         newparal = []
