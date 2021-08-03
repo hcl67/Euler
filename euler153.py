@@ -1,4 +1,33 @@
- # 一个半小时版本，再想想
+# 1分钟版本
+def sss(n): #快速求<=n的因子和
+    rrr = n**2
+    for i in range(1,n//2+1):
+        rrr -= n%i
+    k = (n-1)//2
+    rrr -= k * (1+k)//2
+    return rrr
+N = 10**8
+
+ccdict = defaultdict(int)
+
+for i in range(1,isqrt(N)+1):
+    for j in range(1,min(i,isqrt(N - i**2))+1):
+        if gcd(i,j) == 1:
+            if i == j:
+                ccdict[i**2+j**2] += (i)*2
+            else:
+                ccdict[i**2+j**2] += (i+j)*2
+ans = 0
+ans = sss(N)                
+for k,v in ccdict.items():
+    if k > N//2:
+        ans += v
+    else:
+        ans += v*sss(N//k)
+print(ans)
+
+'''
+# 一个半小时版本，再想想
 __f = open("d:\prime100000.txt", "r")
 __plist = []
 for line in __f:
@@ -40,13 +69,6 @@ from functools import reduce
 time0 = datetime.now()
 
 N = 10**5
-
-'''
-实数部分有 n = p1^n1 *...* pk^nk => S(n) = S(p1^n1)*...*S(pk^nk) = (p1^(n1+1)-1)/(p1-1) *...* (pk^(nk+1)-1)/(pk-1)
-
-虚数部分找可进一步分解的[pi],再组合
-
-'''
 ccdict = defaultdict(int)
 
 for i in range(1,isqrt(N)+1):
@@ -89,3 +111,4 @@ for i in range(2,N+1):
 
 print(sum(tot))
 print(time1-time0,datetime.now()-time1)
+'''
