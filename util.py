@@ -46,7 +46,7 @@ def fct(n):
     return sorted(fct)
 
     
-def gcdplus(a,b):
+def gcdplus(a,b):  #生产素勾股数
     if a > b:
         r, nr = a, b
     else:
