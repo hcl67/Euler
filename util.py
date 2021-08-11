@@ -45,7 +45,16 @@ def fct(n):
         fct = [x*y for x in fct for y in kv]
     return sorted(fct)
 
-    
+def pnp(n,p):  #<=n的数中，含质数p的总量
+    if p == 1:
+        return n
+    r = 0
+    pp = p
+    while pp <= n:
+        r += n//pp
+        pp *= p
+    return r
+
 def gcdplus(a,b):  #生产素勾股数
     if a > b:
         r, nr = a, b
