@@ -115,3 +115,25 @@ def max_subarray(numbers):
         current_sum = max(0, current_sum + x)
         best_sum = max(best_sum, current_sum)
     return best_sum
+
+
+
+#时间打点
+timestamp = []
+
+def timemark(printflag = False):
+    from datetime import datetime
+    global timestamp
+    ts = datetime.now()
+    if len(timestamp) == 0:
+        timestamp = [ts]
+    else:    
+        timestamp[-1] = ts - timestamp[-1]
+        timestamp += [ts]
+    if printflag:
+        for i in range(len(timestamp)-1):
+            print(timestamp[i])
+        timestamp = []
+    return 
+        
+timemark()
